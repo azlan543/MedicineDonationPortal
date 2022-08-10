@@ -1,0 +1,72 @@
+﻿@model MedicineDonationPortal.Models.Medicine
+
+<div class="container">
+    <table class="table table-bordered table-light">
+        <tr>
+            <th>MedicineId</th>
+            <th>MedicineName</th>
+            <th>Price</th>
+            <th>MfgDate</th>
+            <th>ExpDate</th>
+            <th>Quantity</th>
+        </tr>
+        @{
+            try
+            {
+                if (TempData["medicine"] != null)
+                {
+                    foreach(var x in (List<MedicineDonationPortal.Models.Medicine>)TempData["medicine"])
+                    {
+                        <tr>
+                        <td>@x.MedicineId</td>
+                        <td>@x.MedicineName</td>
+                        <td>@x.Price</td>
+                        <td>@x.MfgDate</td>
+                        <td>@x.ExpDate</td>
+                        <td>@x.Quantity</td>
+                        </tr>
+                        
+                    }
+                }
+
+            }
+            catch
+            {
+                
+            }
+        }
+    </table>
+</div>
+
+@{
+    try
+    {
+        if(TempData["EditMsg"] !=null)
+        {
+                <script>
+                swal("Good job!", "Data Updated Sucecssfully!", "success");
+                </script>
+        }
+    }
+    catch
+    {
+        
+    }
+}
+
+@{
+    try
+    {
+        if(TempData["DeleteMsg"] !=null)
+        {
+                <script>
+                swal("Good job!", "Data Deleted Sucecssfully!", "success");
+                </script>
+        }
+    }
+    catch
+    {
+        
+    }
+}
+

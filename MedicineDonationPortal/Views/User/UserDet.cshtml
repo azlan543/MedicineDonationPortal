@@ -1,0 +1,42 @@
+﻿<div class="container">
+    <table class="table table-bordered table-light">
+        <tr>
+            <th>UserId</th>
+            <th>UserName</th>
+            <th>EmailId</th>
+            <th>Password</th>
+            <th>ContactNumber</th>
+            <th>Address</th>
+            <th>Action</th>
+        </tr>
+        @{
+            try
+            {
+                if (TempData["users"] != null)
+                {
+                    foreach(var x in (List<MedicineDonationPortal.Models.UserReg>)TempData["users"])
+                    {
+                        <tr>
+                        <td>@x.UserId</td>
+                        <td>@x.UserName</td>
+                        <td>@x.EmailId</td>
+                        <td>@x.Password</td>
+                        <td>@x.ContactNumber</td>
+                        <td>@x.Address</td>
+                        <td>
+                        <a href="~/User/Edit?id=@x.UserId" class="btn btn-warning">Edit</a>
+
+                         <a href="~/User/Delete?id=@x.UserId" class="btn btn-danger" style="margin-left:3%">Delete</a>
+                        </td>
+                        </tr>
+                    }
+                }
+
+            }
+            catch
+            {
+                
+            }
+        }
+    </table>
+</div>

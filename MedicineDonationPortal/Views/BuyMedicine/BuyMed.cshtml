@@ -1,0 +1,74 @@
+﻿@model MedicineDonationPortal.Models.MedBuy
+
+@{
+    ViewData["Title"] = "Buy Medicine ";
+}
+
+<h1>BuyMedicine</h1>
+
+<h4>MedBuy</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="BuyMedicine">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group ">
+                <label asp-for="UserId" class="control-label"></label>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicineName" class="control-label"></label>
+                <input asp-for="MedicineName" class="form-control" />
+                <span asp-validation-for="MedicineName" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="MobileNumber" class="control-label"></label>
+                <input asp-for="MobileNumber" class="form-control" />
+                <span asp-validation-for="MobileNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Buy" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+@{
+    try
+    {
+        if(TempData["MedBuy"] !=null)
+        {
+            if(TempData["MedBuy"] == "1")
+            {
+                <script>
+                swal("Good job!", "Data Inserted Sucecssfully!", "success");
+                </script>
+            }
+            else
+            {
+                <script>
+                swal("Error Found!", "Unable to Insert Data!", "error");
+                </script>
+            }
+        }
+    }
+    catch
+    {
+        
+    }
+}

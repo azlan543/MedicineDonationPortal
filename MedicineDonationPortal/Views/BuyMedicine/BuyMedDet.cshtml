@@ -1,0 +1,67 @@
+﻿@model MedicineDonationPortal.Models.MedBuy
+
+<div class="container">
+    <h1></h1>
+    <table class="table table-bordered table-light">
+        <tr>
+            <th>UserId</th>
+             <th>UserName</th>
+            <th>MedicineName</th>
+            <th>MobileNumber</th>
+        </tr>
+        @{
+            try
+            {
+                if (TempData["MedBuy"] != null)
+                {
+                    foreach(var x in (List<MedicineDonationPortal.Models.MedBuy>)TempData["MedBuy"])
+                    {
+                        <tr>
+                        <td>@x.UserId</td>
+                        <td>@x.UserName</td>
+                        <td>@x.MedicineName</td>
+                        <td>@x.MobileNumber</td>
+                        </tr>
+                    }
+                }
+
+
+            }
+            catch
+            {
+                
+            }
+        }
+    </table>
+</div>
+@{
+    try
+    {
+        if(TempData["EditMsg"] !=null)
+        {
+                <script>
+                swal("Good job!", "Data Updated Sucecssfully!", "success");
+                </script>
+        }
+    }
+    catch
+    {
+        
+    }
+}
+
+@{
+    try
+    {
+        if(TempData["DeleteMsg"] !=null)
+        {
+                <script>
+                swal("Good job!", "Data Deleted Sucecssfully!", "success");
+                </script>
+        }
+    }
+    catch
+    {
+        
+    }
+}

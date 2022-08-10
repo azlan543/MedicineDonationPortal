@@ -1,0 +1,49 @@
+﻿
+@model MedicineDonationPortal.Models.Medicine
+<div class="container mb-5">
+    <a href="~/Medicine/AddMedicine" class="btn btn-success" >Add Medicine</a>
+</div>
+<div class="container">
+    <table class="table table-bordered table-light">
+        <tr>
+            <th>MedicineId</th>
+            <th>MedicineName</th>
+            <th>Price</th>
+            <th>MfgDate</th>
+            <th>ExpDate</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </tr>
+        @{
+            try
+            {
+                if (TempData["medicine"] != null)
+                {
+                    foreach(var x in (List<MedicineDonationPortal.Models.Medicine>)TempData["medicine"])
+                    {
+                        <tr>
+                        <td>@x.MedicineId</td>
+                        <td>@x.MedicineName</td>
+                        <td>@x.Price</td>
+                        <td>@x.MfgDate</td>
+                        <td>@x.ExpDate</td>
+                        <td>@x.Quantity</td>
+                         <td>
+                         <a href="~/Medicine/Edit?id=@x.MedicineId" class="btn btn-warning">Edit</a>
+
+                         <a href="~/Medicine/Delete?id=@x.MedicineId" class="btn btn-danger" style="margin-left:3%">Delete</a>
+                        </td>
+                        </tr>
+                        
+                    }
+                }
+
+            }
+            catch
+            {
+                
+            }
+        }
+    </table>
+</div>
+

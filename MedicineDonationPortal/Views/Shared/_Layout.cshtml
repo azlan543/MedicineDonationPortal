@@ -1,0 +1,158 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Medicine Donation</title>
+    <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="../OMMSWebApp.styles.css" asp-append-version="true" />
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body style="background-image:url('https://cdn.painscale.com/cms/imgs/trt_medication_antidepressants_pills_00.jpg');">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><b>Online Medicine App</b></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    @{
+                        try
+                        {
+                            var role= HttpContextAccessor.HttpContext.Session.GetInt32("role");
+                            if(role == 101)
+                            {
+
+                                           <div class="dropdown">
+                                           
+                                           <button class="btn default dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <b>Add</b>
+                                           </button>
+                                           <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                           <li><a tabindex="-1" href="@Url.Action("NGODet", "NGO")" class="text-decoration-none"><b>Add NGO</b></a></li>
+                                           <li><a tabindex="-1" href= "@Url.Action("Add", "Medicine")"class="text-decoration-none"><b>Add Medicine</b></a></li>
+                                           
+                                           </ul>
+                                          
+                                           
+                                           
+                                           <button class="btn default dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <b>View</b>
+                                           </button>
+                                           <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                           <li><a tabindex="-1" href="@Url.Action("OnlyNgo", "NGO")" class="text-decoration-none"><b>View NGO</b></a></li>
+                                           <li><a tabindex="-1" href="@Url.Action("UserDet", "User")" class="text-decoration-none"><b>View User</b></a></li>
+
+                                           <li><a tabindex="-1" href= "@Url.Action("OnlyUser", "Medicine")"class="text-decoration-none"><b>View Report</b></a></li>
+                                           
+                                           </ul>
+                           
+                                           </div>
+                                           <ul class="navbar-nav flex-grow-1">
+                                           <li class="nav-item">
+                                           <a class="nav-link text-dark" asp-area="" asp-controller="Logout" asp-action="LogoutPage"><b>Log Out</b></a>
+                                           </li>
+                                           </ul>
+
+                            }
+                            else if (role==102)
+                            {
+                                        
+                                            <ul class="navbar-nav flex-grow-1">
+                                            <li class="nav-item">
+                                           <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="UserRegistration"><b>Register here</b></a>
+                                           </li>
+                                           
+                                           <li class="nav-item">
+                                           <a class="nav-link text-dark" asp-area="" asp-controller="Medicine" asp-action="OnlyUser"><b>Medicines Available</b></a>
+                                           </li>
+                                           <li class="nav-item">
+                                           <a class="nav-link text-dark" asp-area="" asp-controller="BuyMedicine" asp-action="BuyMed"><b>Buy Medicine</b> </a>
+                                           </li>
+                                           <li class="nav-item">
+                                           <a class="nav-link text-dark" asp-area="" asp-controller="Medicine" asp-action="AddMedicine"><b>Donate Medicine</b> </a>
+                                           </li>
+                                          <li>
+                                          <a class="nav-link text-dark" href= "@Url.Action("BuyMedDet", "BuyMedicine")"><b>My Order</b></a>
+                                          </li>
+                                           <li class="nav-item">
+                                           <a class="nav-link text-dark" asp-area="" asp-controller="Logout" asp-action="LogoutPage"><b>Log Out</b></a>
+                                           </li>
+
+                                            </ul>
+                                            
+                                        
+
+                            }
+                            else if (role == 103)
+                            {
+                                            <ul class="navbar-nav flex-grow-1">
+                                           <li class="nav-item dropdown-menu">
+                                           <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action=""><b>Home</b></a>
+                                           </li>
+                                           <li class="nav-item">
+                                           <a class="nav-link text-dark" asp-area="" asp-controller="NGO" asp-action="NGODet"><b>View</b> </a>
+                                           </li>
+                                            <li class="nav-item">
+                                           <a class="nav-link text-dark" asp-area="" asp-controller="Logout" asp-action="LogoutPage"><b>Log Out</b></a>
+                                           </li>
+                                           </ul>
+
+                                
+                            }
+
+                            else if (role==104)
+                            {
+                                            <ul class="navbar-nav flex-grow-1 ">
+                                           <li class="nav-item ">
+                                           <a class="nav-link text-dark " asp-area="" asp-controller="Executive" asp-action="ExecutivePage"><b>Home</b></a>
+                                           </li>
+                                           <li class="nav-item">
+                                           <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="UserDet"><b>View Assigned Users</b></a>
+                                           </li>
+                                           <li class="nav-item">
+                                           <a class="nav-link text-dark" asp-area="" asp-controller="Logout" asp-action="LogoutPage"><b>Log Out</b></a>
+                                           </li>
+                                           </ul>
+                                
+                            }
+
+
+                        }
+                        catch
+                        {
+                            
+                        }
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer text-muted">
+        <div class="container">
+            &copy; 2022 - Medicine Donation App - <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    
+</body>
+</html>
+
+
+    
